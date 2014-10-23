@@ -106,7 +106,7 @@ This can be used as follows:
 
 <b>WPHotspotLabel</b> - A subclass of WPTappableLabel which detects the attributes of the text at the tapped position, and executes the action if a WPAttributedStyleAction attribute is found.
 
-Note that these classes have not been tested as exhaustively, so it is possible that these do not behave as expected under all conditions. In particular, WPHotspotLabel uses CoreText layout to detect the attributes of the tapped position, which could potentially result in different layout than the one being displayed. Under all tests so performed so far with simple labels and formatting, the detection does work correctly, but  you have been warned!
+Note that these classes have not been tested as exhaustively, so it is possible that these do not behave as expected under all conditions. In particular, WPHotspotLabel uses CoreText layout to detect the attributes of the tapped position, which could potentially result in different layout than the one being displayed. Under all tests performed so far with simple labels and formatting, the detection does work correctly, but  you have been warned!
 
 
 
@@ -116,12 +116,15 @@ Example
 ![Screen](screen.png)
 
 
-
+    // Example using fonts and colours
     NSDictionary* style1 = @{@"body":[UIFont fontWithName:@"HelveticaNeue" size:18.0],
                              @"bold":[UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0],
                              @"red": [UIColor redColor]};
 
 
+ 
+
+     // Example using arrays of styles, dictionary attributes for underlining and image styles
 
      NSDictionary* style2 = @{@"body" :
                                  @[[UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0],
@@ -130,6 +133,9 @@ Example
                                     @{NSUnderlineStyleAttributeName : @(kCTUnderlineStyleSingle|kCTUnderlinePatternSolid)}
                                      ],
                                 @"thumb":[UIImage imageNamed:@"thumbIcon"] };
+
+
+    // Example using blocks for actions when text is tapped. Uses the 'link' attribute to style the links
 
     NSDictionary* style3 = @{@"body":[UIFont fontWithName:@"HelveticaNeue" size:22.0],
                              @"help":[WPAttributedStyleAction styledActionWithAction:^{
