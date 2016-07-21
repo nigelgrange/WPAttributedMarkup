@@ -51,19 +51,22 @@
 {
     // Locate the attributes of the text within the label at the specified point
     NSDictionary* dictionary = nil;
+    CFRange currentRange = CFRangeMake(0, 0);
     
     // First, create a CoreText framesetter
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)self.attributedText);
+    // get the real height needed by the attributed string assuming the width of the label is fixed 
+    CGSize size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, currentRange, NULL, CGSizeMake(self.frame.size.width, CGFLOAT_MAX), NULL);
     
     CGMutablePathRef framePath = CGPathCreateMutable();
-    CGPathAddRect(framePath, NULL, CGRectMake(0, 0, self.frame.size.width, self.frame.size.height));
+    
+    CGPathAddRect(framePath, NULL, CGRectMake(0, 0, size.width, size.height));
     // Get the frame that will do the rendering.
-    CFRange currentRange = CFRangeMake(0, 0);
     CTFrameRef frameRef = CTFramesetterCreateFrame(framesetter, currentRange, framePath, NULL);
     CGPathRelease(framePath);
-
+    
     // Get each of the typeset lines
-    NSArray *lines = (__bridge id)CTFrameGetLines(frameRef);
+    NSArray* lines = (__bridge id)CTFrameGetLines(frameRef);
     
     CFIndex linesCount = [lines count];
     CGPoint *lineOrigins = (CGPoint *) malloc(sizeof(CGPoint) * linesCount);
