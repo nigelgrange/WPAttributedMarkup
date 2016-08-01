@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "WPAttributedMarkup"
-  s.version          = "1.0.1"
+  s.version          = "1.0.2"
   s.summary          = "WPAttributedMarkup creates an attributed string from text with markup tags and a style dictionary."
   s.homepage         = "https://github.com/nigelgrange/WPAttributedMarkup"
   s.license          = 'MIT'
